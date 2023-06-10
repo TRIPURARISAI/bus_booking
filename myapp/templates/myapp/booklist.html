@@ -1,0 +1,61 @@
+{% extends 'myapp/base.html' %}
+{% block content %}
+<h3>{{msg}}</h3>
+<center><h2 >Booking History</h2></center>
+<table class="table table-dark table-striped">
+    <thead class="thread-dark">
+    <td>BOOKING ID</td>
+    <td>USER NAME</td>
+    <td>BUS NAME</td>
+    <td>SOURCE</td>
+    <td>DESTINATION</td>
+    <td>NUM OF SEATS</td>
+    <td>PRICE</td>
+    <td>DATE</td>
+    <td>TIME</td>
+    <td>STATUS</td>
+
+
+    </thead>
+
+    {% for row in book_list %}
+    <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.bus_name}}</td>
+        <td>{{row.source}}</td>
+        <td>{{row.dest}}</td>
+        <td>{{row.nos}}</td>
+        <td>{{row.price}}</td>
+        <td>{{row.date}}</td>
+        <td>{{row.time}}</td>
+        <td>{{row.status}}</td>
+        <td></td>
+
+
+    </tr>
+    {% endfor %}
+</table>
+    <center>
+<form action="{% url 'cancellings' %}" method="post">
+    <h3>Cancel Ticket</h3>
+    {% csrf_token %}
+        <div class="col-auto">
+            <div class="col-5">
+                <input name='bus_id' class="form-control" type="number" id="example-email-input" placeholder="Booking_Id" required>
+            </div>
+        </div>
+
+
+    <br>
+    <br>
+    <div class="pull-center">
+        <button type="submit" class="btn btn-danger float-center">Cancel Ticket</button>
+    </div>
+
+
+    {{error}}
+
+</form>
+</center>
+{% endblock %}
